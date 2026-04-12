@@ -168,7 +168,7 @@ export function setupDiscovery(app: any, config: ApiConfig) {
               fixed: {
                 mode: "fixed",
                 currency: "USD",
-                amount: route.price,
+                amount: route.price.replace("$", ""),
               },
             },
             protocols: [{ "x402": {} }],
