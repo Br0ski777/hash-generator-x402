@@ -83,14 +83,37 @@ export function buildPaymentConfig(routes: RouteConfig[], payTo = WALLET_ADDRESS
         bazaar: {
           info: {
             input: {
-              type: "mcp",
-              toolName: route.toolName,
-              description: route.toolDescription,
-              inputSchema: route.inputSchema,
+              type: "http",
+              bodyType: "json",
+              body: {},
             },
             output: {
               type: "json",
+              example: {},
             },
+          },
+          schema: {
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            type: "object",
+            properties: {
+              input: {
+                type: "object",
+                properties: {
+                  type: { type: "string", const: "http" },
+                  bodyType: { type: "string", enum: ["json"] },
+                  body: route.inputSchema,
+                },
+                required: ["body"],
+              },
+              output: {
+                type: "object",
+                properties: {
+                  type: { type: "string" },
+                  example: { type: "object" },
+                },
+              },
+            },
+            required: ["input", "output"],
           },
         },
       },
@@ -165,11 +188,9 @@ export function setupDiscovery(app: any, config: ApiConfig) {
           ...(parameters && parameters.length > 0 ? { parameters } : {}),
           "x-payment-info": {
             price: {
-              fixed: {
-                mode: "fixed",
-                currency: "USD",
-                amount: route.price.replace("$", ""),
-              },
+              mode: "fixed",
+              currency: "USD",
+              amount: route.price.replace("$", ""),
             },
             protocols: [{ "x402": {} }],
           },
