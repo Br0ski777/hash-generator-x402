@@ -3,7 +3,7 @@ import type { ApiConfig } from "./shared";
 export const API_CONFIG: ApiConfig = {
   name: "hash-generator",
   slug: "hash-generator",
-  description: "Cryptographic hash generator supporting MD5, SHA1, SHA256, SHA512, and bcrypt.",
+  description: "Generate MD5, SHA1, SHA256, SHA512, and bcrypt hashes instantly. Returns hash string, algorithm, and length in one call.",
   version: "1.0.0",
   routes: [
     {
@@ -12,7 +12,17 @@ export const API_CONFIG: ApiConfig = {
       price: "$0.001",
       description: "Generate a cryptographic hash from text",
       toolName: "crypto_generate_hash",
-      toolDescription: "Use this when you need to generate a cryptographic hash of text. Supports md5, sha1, sha256, sha512, and bcrypt algorithms. Returns the hash string, algorithm used, and hash length. Do NOT use for password strength checking — use security_check_password. Do NOT use for data validation — use data_validate_json.",
+      toolDescription: `Use this when you need to generate a cryptographic hash of any text string. Returns the hash digest, algorithm used, and hash length in a single response.
+
+1. hash -- the computed hash string (hex-encoded or bcrypt format)
+2. algorithm -- which algorithm was used (md5, sha1, sha256, sha512, bcrypt)
+3. length -- character length of the resulting hash
+
+Example output: {"hash":"e3b0c44298fc1c149afbf4c8996fb924...","algorithm":"sha256","length":64}
+
+Use this FOR data integrity checks, fingerprinting content, generating checksums before file transfers, or creating bcrypt hashes for password storage. Use this BEFORE storing user passwords (with bcrypt) or verifying file integrity.
+
+Do NOT use for password strength checking -- use security_check_password instead. Do NOT use for data validation -- use data_validate_json instead. Do NOT use for encoding/decoding -- use utility_encode_base64 instead.`,
       inputSchema: {
         type: "object",
         properties: {
