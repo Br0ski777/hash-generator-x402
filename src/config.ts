@@ -31,6 +31,16 @@ Do NOT use for password strength checking -- use security_check_password instead
         },
         required: ["text"],
       },
+      outputSchema: {
+        type: "object",
+        properties: {
+          hash: { type: "string", description: "Generated hash value (hex-encoded or bcrypt format)" },
+          algorithm: { type: "string", description: "Algorithm used (md5, sha1, sha256, sha512, bcrypt)" },
+          length: { type: "number", description: "Length of the hash string" },
+          inputLength: { type: "number", description: "Length of the input text" },
+        },
+        required: ["hash", "algorithm", "length", "inputLength"],
+      },
     },
   ],
 };
