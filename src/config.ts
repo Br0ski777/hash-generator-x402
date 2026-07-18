@@ -9,7 +9,7 @@ export const API_CONFIG: ApiConfig = {
     {
       method: "POST",
       path: "/api/hash",
-      price: "$0.001",
+      price: "$0.003",
       description: "Generate a cryptographic hash from text",
       toolName: "crypto_generate_hash",
       toolDescription: "Use this when you need to generate a cryptographic hash of text. Supports md5, sha1, sha256, sha512, and bcrypt algorithms. Returns the hash string, algorithm used, and hash length. Do NOT use for password strength checking — use security_check_password. Do NOT use for data validation — use data_validate_json.",
