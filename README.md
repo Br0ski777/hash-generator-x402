@@ -37,7 +37,7 @@ Any x402-aware client ([`@x402/fetch`](https://www.npmjs.com/package/@x402/fetch
 
 | Tool | Method | Path | Price | Description |
 |---|---|---|---|---|
-| `crypto_generate_hash` | POST | `/api/hash` | $0.001 | Generate a cryptographic hash from text |
+| `crypto_generate_hash` | POST | `/api/hash` | $0.003 | Generate a cryptographic hash from text |
 
 ### `crypto_generate_hash`
 
